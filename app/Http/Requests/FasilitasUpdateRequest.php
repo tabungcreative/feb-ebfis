@@ -25,7 +25,7 @@ class FasilitasUpdateRequest extends FormRequest
     {
         return [
             //
-            'judul' => 'required',
+            'nama_fasilitas' => 'required',
             'isi' => 'required',
         ];
     }

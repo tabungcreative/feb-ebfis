@@ -10,10 +10,10 @@ use App\Http\Requests\UnduhanUpdateRequest;
 use App\Models\Unduhan;
 use App\Services\UnduhanService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-
-class UnduhanServiceImpl implements UnduhanService{
+class UnduhanServiceImpl implements UnduhanService
+{
     use Media;
 
     function add(UnduhanAddRequest $request): Unduhan
@@ -30,7 +30,7 @@ class UnduhanServiceImpl implements UnduhanService{
             ]);
             $unduhan->save();
             DB::commit();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             DB::rollBack();
             throw new InvariantException($exception->getMessage());
         }
@@ -38,14 +38,23 @@ class UnduhanServiceImpl implements UnduhanService{
         return $unduhan;
     }
 
-    function list(string $key = ''): Collection
+    function list(string $key = '', int $size = 10): LengthAwarePaginator
     {
-        $collection = Unduhan::where('nama_file', 'like', '%' . $key . '%')
+        $paginate = Unduhan::where('nama_file', 'like', '%' . $key . '%')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate($size);
 
-        return $collection;
+        return $paginate;
     }
+
+    // function list(string $key = ''): LengthAwarePaginator
+    // {
+    //     $collection = Unduhan::where('nama_file', 'like', '%' . $key . '%')
+    //         ->orderBy('created_at', 'DESC')
+    //         ->get();
+
+    //     return $collection;
+    // }
 
     function update(UnduhanUpdateRequest $request, int $id): Unduhan
     {
@@ -56,11 +65,25 @@ class UnduhanServiceImpl implements UnduhanService{
         try {
             $unduhan->nama_file = $namaFile;
             $unduhan->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception);
         }
 
         return $unduhan;
+    }
+
+
+    function delete(int $id): void
+    {
+        $unduhan = Unduhan::find($id);
+        try {
+            if ($unduhan->gambar_path != null) {
+                unlink($unduhan->gambar_path);
+            }
+            $unduhan->delete();
+        } catch (\Exception $exception) {
+            throw new InvariantException($exception->getMessage());
+        }
     }
 
     function addFile($file, int $id): Unduhan
@@ -69,16 +92,16 @@ class UnduhanServiceImpl implements UnduhanService{
 
         try {
             $dataFile = $this->uploads($file, 'unduhan/');
-        
-            $fileUrl = asset('storage/'. $dataFile['filePath']);
-            $filePath = public_path('storage/'. $dataFile['filePath']);
+
+            $fileUrl = asset('storage/' . $dataFile['filePath']);
+            $filePath = public_path('storage/' . $dataFile['filePath']);
             $fileFormat = $dataFile['fileType'];
 
             $unduhan->file_url = $fileUrl;
             $unduhan->file_path = $filePath;
             $unduhan->format = $fileFormat;
             $unduhan->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -94,17 +117,16 @@ class UnduhanServiceImpl implements UnduhanService{
                 unlink($unduhan->file_path);
             }
 
-            $dataFile = $this->uploads($file, 'pengumuman/');
-            $filePath = public_path('storage/'. $dataFile['filePath']);
-            $fileUrl = asset('storage/'. $dataFile['filePath']);
+            $dataFile = $this->uploads($file, 'unduhan/');
+            $filePath = public_path('storage/' . $dataFile['filePath']);
+            $fileUrl = asset('storage/' . $dataFile['filePath']);
             $fileFormat = $dataFile['fileType'];
 
             $unduhan->file_path = $filePath;
             $unduhan->file_url = $fileUrl;
             $unduhan->format = $fileFormat;
             $unduhan->save();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -120,12 +142,8 @@ class UnduhanServiceImpl implements UnduhanService{
                 unlink($unduhan->file_path);
             }
             $unduhan->delete();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
     }
 }
-
-
-
-?>

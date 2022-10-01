@@ -25,11 +25,15 @@ class DosenAddRequest extends FormRequest
     {
         return [
             //
-            'nidn' => 'required|unique:dosen,nidn|numeric',
+            'kode_dosen' => 'required|unique:dosen,kode_dosen',
+            'nidn' => 'unique:dosen,nidn|numeric',
             'nama' => 'required',
             'prodi' => 'required',
             'jenis_kelamin' => 'required',
             'nomer_hp' => 'required|numeric',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'nik' => 'required|numeric',
         ];
     }
 }

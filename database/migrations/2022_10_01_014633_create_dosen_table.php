@@ -15,11 +15,15 @@ class CreateDosenTable extends Migration
     {
         Schema::create('dosen', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_dosen')->unique();
             $table->string('nidn')->unique();
             $table->string('nama');
             $table->enum('prodi', ['manajemen', 'akuntansi', 'perbankan syariah']);
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('nomer_hp');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
+            $table->string('nik')->unique();
             $table->timestamps();
         });
     }

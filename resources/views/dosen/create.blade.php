@@ -16,13 +16,18 @@
                     @csrf
                         <div class="mb-3">
                             <label class="text-danger">*</label>
+                            <label for="judul">Kode Dosen</label>
+                            <input class="form-control" id="kode_dosen" type="text" placeholder="Masukkan kode dosen" name="kode_dosen" value="{{ old('kode_dosen') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
                             <label for="judul">Nidn</label>
-                            <input class="form-control" id="nidn" type="text" placeholder="nidn" name="nidn" value="{{ old('nidn') }}" required>
+                            <input class="form-control" id="nidn" type="text" placeholder="Masukkan Nidn" name="nidn" value="{{ old('nidn') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nama">Nama</label>
-                            <input class="form-control" id="nama" type="text" placeholder="nama" name="nama" value="{{ old('nama') }}" required>
+                            <input class="form-control" id="nama" type="text" placeholder="Masukkan nama" name="nama" value="{{ old('nama') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
@@ -49,7 +54,22 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nomer_hp">Nomer Handphone</label>
-                            <input class="form-control" id="nomer_hp" type="text" placeholder="nomer handphone" name="nomer_hp" value="{{ old('nomer_hp') }}" required>
+                            <input class="form-control" id="nomer_hp" type="text" placeholder="Masukkan handphone" name="nomer_hp" value="{{ old('nomer_hp') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input class="form-control" id="tempat_lahir" type="text" placeholder="Masukkan tempat lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="nik">NIK</label>
+                            <input class="form-control" id="nik" type="text" placeholder="Masukkan NIK" name="nik" value="{{ old('nik') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input class="" id="tanggal_lahir" type="date" placeholder="tanggal lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
                         </div>
                         <button button type="submit" class="btn btn-primary">Kirim</button>
                     </form>

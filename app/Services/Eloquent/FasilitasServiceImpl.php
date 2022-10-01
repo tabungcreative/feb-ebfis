@@ -84,7 +84,7 @@ class FasilitasServiceImpl implements FasilitasService
                 unlink($fasilitas->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'fasi$fasilitas/gambar/');
+            $dataFile = $this->uploads($image, 'fasilitas/gambar/');
             $filePath = public_path('storage/' . $dataFile['filePath']);
             $fileUrl = asset('storage/' . $dataFile['filePath']);
 
@@ -126,7 +126,7 @@ class FasilitasServiceImpl implements FasilitasService
                 unlink($fasilitas->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'pengumuman/');
+            $dataFile = $this->uploads($image, 'fasilitas/');
             $filePath = public_path('storage/' . $dataFile['filePath']);
             $fileUrl = asset('storage/' . $dataFile['filePath']);
 

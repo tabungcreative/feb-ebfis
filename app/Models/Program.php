@@ -9,6 +9,9 @@ class Program extends Model
 {
     use HasFactory;
 
+    protected $table = 'program';
+
+
     protected $fillable = [
         'nama_program', 'isi', 'gambar_path', 'gambar_url'
     ];

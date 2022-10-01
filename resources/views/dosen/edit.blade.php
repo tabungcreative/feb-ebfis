@@ -17,6 +17,11 @@
                     @method('put')
                         <div class="mb-3">
                             <label class="text-danger">*</label>
+                            <label for="judul">Kode Dosen</label>
+                            <input class="form-control" id="kode_dosen" type="text" placeholder="kode_dosen" name="kode_dosen" value="{{ old('kode_dosen', $dosen->kode_dosen) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
                             <label for="judul">Nidn</label>
                             <input class="form-control" id="nidn" type="text" placeholder="nidn" name="nidn" value="{{ old('nidn', $dosen->nidn) }}" required>
                         </div>
@@ -51,6 +56,21 @@
                             <label class="text-danger">*</label>
                             <label for="nomer_hp">Nomer Handphone</label>
                             <input class="form-control" id="nomer_hp" type="text" placeholder="nomer handphone" name="nomer_hp" value="{{ old('nomer_hp',$dosen->nomer_hp) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <input class="form-control" id="tempat_lahir" type="text" placeholder="tempat lahir" name="tempat_lahir" value="{{ old('tempat_lahir',$dosen->tempat_lahir) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="nik">NIK</label>
+                            <input class="form-control" id="nik" type="text" placeholder="NIK" name="nik" value="{{ old('nik',$dosen->nik) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="tanggal_lahir">Tanggal Lahir</label>
+                            <input class="" id="tanggal_lahir" type="date" placeholder="tanggal lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir',$dosen->tanggal_lahir) }}" required>
                         </div>
                         <button button type="submit" class="btn btn-primary">Kirim</button>
                     </form>

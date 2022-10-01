@@ -25,7 +25,7 @@ class FasilitasAddRequest extends FormRequest
     {
         return [
             //
-            'judul' => 'required',
+            'nama_fasilitas' => 'required',
             'isi' => 'required',
             'gambar' => 'required|file|mimes:jpg,png'
         ];

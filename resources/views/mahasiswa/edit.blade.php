@@ -17,6 +17,11 @@
                     @method('put')
                         <div class="mb-3">
                             <label class="text-danger">*</label>
+                            <label for="nim">Nim</label>
+                            <input class="form-control" id="nim" type="text" placeholder="nim" name="nim" value="{{ old('nim', $mahasiswa->nim) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
                             <label for="nama">Nama</label>
                             <input class="form-control" id="nama" type="text" placeholder="nama" name="nama" value="{{ old('nama',$mahasiswa->nama) }}" required>
                         </div>

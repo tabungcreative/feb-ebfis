@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Mahasiswa;
 use Maatwebsite\Excel\Concerns\ToModel;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Date;
 
 class MahasiswaImport implements ToModel
 {
@@ -21,7 +22,7 @@ class MahasiswaImport implements ToModel
             'jenis_kelamin' => $row[3],
             'nomer_hp' => $row[4],
             'tempat_lahir' => $row[5],
-            'tanggal_lahir' => $row[6],
+            'tanggal_lahir' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['6'])->format('Y-m-d'),
             'nik' => $row[7],
         ]);
     }

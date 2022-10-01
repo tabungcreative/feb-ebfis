@@ -27,7 +27,7 @@ class PengumumanAddRequest extends FormRequest
             //
             'judul' => 'required',
             'isi' => 'required',
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|file|max:5000',
+            'file' => 'mimes:csv,txt,xlx,xls,pdf|file|max:5000',
         ];
     }
 }

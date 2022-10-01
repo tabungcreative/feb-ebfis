@@ -17,12 +17,12 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="judul">Nim</label>
-                            <input class="form-control" id="nidn" type="text" placeholder="nim" name="nim" value="{{ old('nim') }}" required>
+                            <input class="form-control" id="nidn" type="text" placeholder="Masukkan nim" name="nim" value="{{ old('nim') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nama">Nama</label>
-                            <input class="form-control" id="nama" type="text" placeholder="nama" name="nama" value="{{ old('nama') }}" required>
+                            <input class="form-control" id="nama" type="text" placeholder="Masukkan nama" name="nama" value="{{ old('nama') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
@@ -49,17 +49,17 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nomer_hp">Nomer Handphone</label>
-                            <input class="form-control" id="nomer_hp" type="text" placeholder="nomer handphone" name="nomer_hp" value="{{ old('nomer_hp') }}" required>
+                            <input class="form-control" id="nomer_hp" type="text" placeholder="Masukkan nomor handphone" name="nomer_hp" value="{{ old('nomer_hp') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="tempat_lahir">Tempat Lahir</label>
-                            <input class="form-control" id="tempat_lahir" type="text" placeholder="tempat lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
+                            <input class="form-control" id="tempat_lahir" type="text" placeholder="Masukkan tempat lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nik">NIK</label>
-                            <input class="form-control" id="nik" type="text" placeholder="NIK" name="nik" value="{{ old('nik') }}" required>
+                            <input class="form-control" id="nik" type="text" placeholder="Masukkan NIK" name="nik" value="{{ old('nik') }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>

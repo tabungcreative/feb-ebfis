@@ -11,28 +11,38 @@ use App\Services\DosenService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
-class DosenServiceImpl implements DosenService{
+class DosenServiceImpl implements DosenService
+{
     function add(DosenAddRequest $request): Dosen
     {
-        $nidn = $request ->input('nidn');
-        $nama = $request ->input('nama');
-        $prodi = $request ->input('prodi');
-        $jenisKelamin = $request ->input('jenis_kelamin');
-        $nomerHp = $request ->input('nomer_hp');
+        $kodeDosen = $request->input('kode_dosen');
+        $nidn = $request->input('nidn');
+        $nama = $request->input('nama');
+        $prodi = $request->input('prodi');
+        $jenisKelamin = $request->input('jenis_kelamin');
+        $nomerHp = $request->input('nomer_hp');
+        $tempatLahir = $request->input('tempat_lahir');
+        $tanggalLahir = $request->input('tanggal_lahir');
+        $nik = $request->input('nik');
+
 
         try {
             DB::beginTransaction();
             $dosen = new Dosen([
-                'nidn'=>$nidn,
-                'nama'=>$nama,
-                'prodi'=>$prodi,
-                'jenis_kelamin'=>$jenisKelamin,
-                'nomer_hp'=>$nomerHp,
-                
+                'kode_dosen' => $kodeDosen,
+                'nidn' => $nidn,
+                'nama' => $nama,
+                'prodi' => $prodi,
+                'jenis_kelamin' => $jenisKelamin,
+                'nomer_hp' => $nomerHp,
+                'tempat_lahir' => $tempatLahir,
+                'tanggal_lahir' => $tanggalLahir,
+                'nik' => $nik,
+
             ]);
             $dosen->save();
             DB::commit();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             DB::rollBack();
             throw new InvariantException($exception->getMessage());
         }
@@ -41,26 +51,37 @@ class DosenServiceImpl implements DosenService{
 
     function list(string $key = '', int $size = 10): LengthAwarePaginator
     {
-        $dosen = Dosen::where('nama', 'like', '%'.$key.'%')->paginate($size);
+        $dosen = Dosen::where('nama', 'like', '%' . $key . '%')->paginate($size);
 
         return $dosen;
     }
 
     function update(DosenUpdateRequest $request, int $id): Dosen
     {
-        $nama = $request ->input('nama');
-        $prodi = $request ->input('prodi');
-        $jenisKelamin = $request ->input('jenis_kelamin');
-        $nomerHp = $request ->input('nomer_hp');
+        $kodeDosen = $request->input('kode_dosen');
+        $nidn = $request->input('nidn');
+        $nama = $request->input('nama');
+        $prodi = $request->input('prodi');
+        $jenisKelamin = $request->input('jenis_kelamin');
+        $nomerHp = $request->input('nomer_hp');
+        $tempatLahir = $request->input('tempat_lahir');
+        $tanggalLahir = $request->input('tanggal_lahir');
+        $nik = $request->input('nik');
+
         $dosen = Dosen::find($id);
 
         try {
+            $dosen->kode_dosen = $kodeDosen;
+            $dosen->nidn = $nidn;
             $dosen->nama = $nama;
             $dosen->prodi = $prodi;
             $dosen->jenis_kelamin = $jenisKelamin;
             $dosen->nomer_hp = $nomerHp;
+            $dosen->tempat_lahir = $tempatLahir;
+            $dosen->tanggal_lahir = $tanggalLahir;
+            $dosen->nik = $nik;
             $dosen->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -72,11 +93,8 @@ class DosenServiceImpl implements DosenService{
         $dosen = Dosen::find($id);
         try {
             $dosen->delete();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
     }
-} 
-
-
-?>
+}
