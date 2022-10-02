@@ -17,6 +17,6 @@ interface UnduhanService
     function update(UnduhanUpdateRequest $request, int $id): Unduhan;
     function delete(int $id): void;
     function addFile($file, int $id): Unduhan;
-    function updateFile($file, int $id): Unduhan;
-    function deleteFile(int $id): void;
+    function updateFile(int $id, $file): Unduhan;
+    function deleteFile(int $id, $file): Unduhan;
 }

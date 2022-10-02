@@ -18,24 +18,19 @@ class UnduhanServiceImpl implements UnduhanService
 
     function add(UnduhanAddRequest $request): Unduhan
     {
-
         $namaFile = $request->input('nama_file');
         try {
-            DB::beginTransaction();
             $unduhan = new Unduhan([
                 'nama_file' => $namaFile,
                 'file_url' => null,
                 'file_path' => null,
-                'format' => null,
             ]);
             $unduhan->save();
-            DB::commit();
+
+            return $unduhan;
         } catch (\Exception $exception) {
-            DB::rollBack();
             throw new InvariantException($exception->getMessage());
         }
-
-        return $unduhan;
     }
 
     function list(string $key = '', int $size = 10): LengthAwarePaginator
@@ -47,39 +42,29 @@ class UnduhanServiceImpl implements UnduhanService
         return $paginate;
     }
 
-    // function list(string $key = ''): LengthAwarePaginator
-    // {
-    //     $collection = Unduhan::where('nama_file', 'like', '%' . $key . '%')
-    //         ->orderBy('created_at', 'DESC')
-    //         ->get();
-
-    //     return $collection;
-    // }
-
     function update(UnduhanUpdateRequest $request, int $id): Unduhan
     {
-        $namaFile = $request->input('nama_file');
-
         $unduhan = Unduhan::find($id);
+        $namaFile = $request->input('nama_file');
 
         try {
             $unduhan->nama_file = $namaFile;
             $unduhan->save();
         } catch (\Exception $exception) {
-            throw new InvariantException($exception);
+            throw new InvariantException($exception->getMessage());
         }
 
         return $unduhan;
     }
 
-
     function delete(int $id): void
     {
         $unduhan = Unduhan::find($id);
         try {
-            if ($unduhan->gambar_path != null) {
-                unlink($unduhan->gambar_path);
+            if ($unduhan->file_url != null || $unduhan->file_path != null) {
+                unlink($unduhan->file_path);
             }
+
             $unduhan->delete();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
@@ -95,11 +80,9 @@ class UnduhanServiceImpl implements UnduhanService
 
             $fileUrl = asset('storage/' . $dataFile['filePath']);
             $filePath = public_path('storage/' . $dataFile['filePath']);
-            $fileFormat = $dataFile['fileType'];
 
             $unduhan->file_url = $fileUrl;
             $unduhan->file_path = $filePath;
-            $unduhan->format = $fileFormat;
             $unduhan->save();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
@@ -108,23 +91,21 @@ class UnduhanServiceImpl implements UnduhanService
         return $unduhan;
     }
 
-    function updateFile($file, int $id): Unduhan
+    function updateFile(int $id, $file): Unduhan
     {
         $unduhan = Unduhan::find($id);
 
         try {
-            if ($unduhan->file_path != null) {
+            if ($unduhan->file_url != null || $unduhan->file_path != null) {
                 unlink($unduhan->file_path);
             }
 
             $dataFile = $this->uploads($file, 'unduhan/');
             $filePath = public_path('storage/' . $dataFile['filePath']);
             $fileUrl = asset('storage/' . $dataFile['filePath']);
-            $fileFormat = $dataFile['fileType'];
 
             $unduhan->file_path = $filePath;
             $unduhan->file_url = $fileUrl;
-            $unduhan->format = $fileFormat;
             $unduhan->save();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
@@ -133,17 +114,23 @@ class UnduhanServiceImpl implements UnduhanService
         return $unduhan;
     }
 
-    function deleteFile(int $id): void
+
+    function deleteFile(int $id, $file): Unduhan
     {
         $unduhan = Unduhan::find($id);
 
         try {
-            if ($unduhan->file_path != null) {
+            if ($unduhan->file_url != null || $unduhan->file_path != null) {
                 unlink($unduhan->file_path);
             }
-            $unduhan->delete();
+
+            $unduhan->file_url = null;
+            $unduhan->file_path = null;
+            $unduhan->save();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
+
+        return $unduhan;
     }
 }

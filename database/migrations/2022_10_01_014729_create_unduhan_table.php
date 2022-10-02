@@ -18,7 +18,6 @@ class CreateUnduhanTable extends Migration
             $table->string('nama_file');
             $table->string('file_url')->nullable();
             $table->string('file_path')->nullable();
-            $table->string('format')->nullable();
             $table->timestamps();
         });
     }
