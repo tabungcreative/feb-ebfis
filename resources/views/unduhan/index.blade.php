@@ -38,7 +38,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Unduhan</th>
-                                    <th>Tanggal</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -47,7 +46,6 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $data->nama_file }}</td>
-                                        <td>{{ $data->created_at }}</td>
                                         <td class="d-flex flex-col">
                                             <a href="{{ route('unduhan.show', $data->id) }}">
                                                 <div class="btn btn-info "><i class="fas fa-info"></i></div>

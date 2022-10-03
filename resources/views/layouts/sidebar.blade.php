@@ -17,7 +17,7 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{Request::is('/') ? 'active' : ''}}">
         <a class="nav-link" href="/">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-home"></i>
             <span>Dashboard</span></a>
     </li>
 
@@ -52,13 +52,13 @@
     <!-- Nav Item - dosen -->
     <li class="nav-item {{Request::is('dosen*') ? 'active' : ''}}">
         <a class="nav-link" href="/dosen">
-            <i class="fa fa-bullhorn"></i>
+            <i class="fas fa-user-tie"></i>
             <span>Dosen</span></a>
     </li>
     <!-- Nav Item - mahasiswa -->
     <li class="nav-item {{Request::is('mahasiswa*') ? 'active' : ''}}">
         <a class="nav-link" href="/mahasiswa">
-            <i class="fa fa-bullhorn"></i>
+            <i class="fas fa-user-graduate"></i>
             <span>Mahasiswa</span></a>
     </li>
 
@@ -70,19 +70,19 @@
     <!-- Nav Item - program -->
     <li class="nav-item {{Request::is('program*') ? 'active' : ''}}">
         <a class="nav-link" href="/program">
-            <i class="fa fa-bullhorn"></i>
+            <i class="fas fa-chalkboard-teacher"></i>
             <span>Program</span></a>
     </li>
     <!-- Nav Item - fasilitas -->
     <li class="nav-item {{Request::is('fasilitas*') ? 'active' : ''}}">
         <a class="nav-link" href="/fasilitas">
-            <i class="fa fa-bullhorn"></i>
+            <i class="fas fa-laptop-house"></i>
             <span>Fasilitas</span></a>
     </li>
     <!-- Nav Item - unduhan -->
     <li class="nav-item {{Request::is('unduhan*') ? 'active' : ''}}">
         <a class="nav-link" href="/unduhan">
-            <i class="fa fa-bullhorn"></i>
+            <i class="fas fa-cloud-download-alt"></i>
             <span>Unduhan</span></a>
     </li>
     <!-- Sidebar Toggler (Sidebar) -->
