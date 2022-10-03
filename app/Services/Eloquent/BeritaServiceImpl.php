@@ -12,7 +12,7 @@ use App\Models\User;
 use App\Services\BeritaService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 
 class BeritaServiceImpl implements BeritaService
 {
@@ -73,10 +73,9 @@ class BeritaServiceImpl implements BeritaService
     {
         $berita = Berita::find($id);
         try {
-            if ($berita->gambar_path != null) {
-                unlink($berita->gambar_path);
+            if (Storage::disk('s3')->exists($berita->gambar_path)) {
+                Storage::disk('s3')->delete($berita->gambar_path);
             }
-
             $berita->delete();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
@@ -92,9 +91,9 @@ class BeritaServiceImpl implements BeritaService
                 unlink($berita->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'berita/gambar/');
-            $filePath = public_path('storage/' . $dataFile['filePath']);
-            $fileUrl = asset('storage/' . $dataFile['filePath']);
+            $dataFile = $this->uploads($image, 'berita/');
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $berita->gambar_path = $filePath;
             $berita->gambar_url = $fileUrl;
@@ -111,12 +110,11 @@ class BeritaServiceImpl implements BeritaService
         $berita = Berita::find($id);
 
         try {
-            if ($berita->gambar_path != null) {
-                unlink($berita->gambar_path);
-            }
-
             $berita->gambar_url = null;
             $berita->gambar_path = null;
+            if (Storage::disk('s3')->exists($berita->gambar_path)) {
+                Storage::disk('s3')->delete($berita->gambar_path);
+            }
             $berita->save();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
@@ -130,13 +128,13 @@ class BeritaServiceImpl implements BeritaService
         $berita = Berita::find($id);
 
         try {
-            if ($berita->gambar_path != null) {
-                unlink($berita->gambar_path);
+            if (Storage::disk('s3')->exists($berita->gambar_path)) {
+                Storage::disk('s3')->delete($berita->gambar_path);
             }
-
             $dataFile = $this->uploads($image, 'berita/');
-            $filePath = public_path('storage/' . $dataFile['filePath']);
-            $fileUrl = asset('storage/' . $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
+
 
             $berita->gambar_path = $filePath;
             $berita->gambar_url = $fileUrl;

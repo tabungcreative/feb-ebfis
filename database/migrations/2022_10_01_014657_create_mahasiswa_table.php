@@ -22,7 +22,7 @@ class CreateMahasiswaTable extends Migration
             $table->string('nomer_hp');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->string('nik')->unique();
+            $table->string('nik')->nullable();
             $table->timestamps();
         });
     }

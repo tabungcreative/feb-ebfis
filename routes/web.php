@@ -34,14 +34,7 @@ Route::resource('/berita', BeritaController::class);
 Route::resource('/dosen', DosenController::class);
 Route::resource('/fasilitas', FasilitasController::class);
 Route::resource('/mahasiswa', MahasiswaController::class);
-Route::post('/import-mahasiswa', function () {
-    try {
-        Excel::import(new MahasiswaImport, request()->file('file'));
-        return response()->redirectTo(route('mahasiswa.index'))->with('success', 'Berhasil import mahasiswa');
-    } catch (\Exception $exception) {
-        return redirect()->back()->with('error', 'Gagal import mahasiswa, file yang anda masukkan tidak cocok');
-    }
-});
+Route::post('/import-mahasiswa', [MahasiswaController::class, 'import']);
 Route::resource('/pengumuman', PengumumanController::class);
 Route::resource('/program', ProgramController::class);
 Route::resource('/unduhan', UnduhanController::class);

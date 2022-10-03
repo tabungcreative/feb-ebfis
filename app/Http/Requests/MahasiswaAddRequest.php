@@ -32,7 +32,7 @@ class MahasiswaAddRequest extends FormRequest
             'nomer_hp' => 'numeric',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
-            'nik' => 'required|numeric',
+            'nik' => 'numeric',
         ];
     }
 }

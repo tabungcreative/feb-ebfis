@@ -94,9 +94,10 @@ class MahasiswaController extends Controller
     {
         try {
             Excel::import(new MahasiswaImport, request()->file('file'));
-            return back();
+            return response()->redirectTo(route('mahasiswa.index'))->with('success', 'Berhasil import mahasiswa');
         } catch (\Exception $exception) {
-            return redirect()->back()->with('error', 'Gagal import mahasiswa, terjadi kesalahan pada server');
+            dd($exception);
+            return redirect()->back()->with('error', 'Gagal import mahasiswa, file yang anda masukkan tidak cocok');
         }
     }
 }
