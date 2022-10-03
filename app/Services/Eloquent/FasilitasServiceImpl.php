@@ -10,6 +10,7 @@ use App\Http\Requests\FasilitasUpdateRequest;
 use App\Models\Fasilitas;
 use App\Services\FasilitasService;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 class FasilitasServiceImpl implements FasilitasService
 {
@@ -65,8 +66,8 @@ class FasilitasServiceImpl implements FasilitasService
     {
         $fasilitas = Fasilitas::find($id);
         try {
-            if ($fasilitas->gambar_path != null) {
-                unlink($fasilitas->gambar_path);
+            if (Storage::disk('s3')->exists($fasilitas->gambar_path)) {
+                Storage::disk('s3')->delete($fasilitas->gambar_path);
             }
 
             $fasilitas->delete();
@@ -84,9 +85,9 @@ class FasilitasServiceImpl implements FasilitasService
                 unlink($fasilitas->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'fasilitas/gambar/');
-            $filePath = public_path('storage/' . $dataFile['filePath']);
-            $fileUrl = asset('storage/' . $dataFile['filePath']);
+            $dataFile = $this->uploads($image, 'fasilitas/');
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $fasilitas->gambar_path = $filePath;
             $fasilitas->gambar_url = $fileUrl;
@@ -103,8 +104,8 @@ class FasilitasServiceImpl implements FasilitasService
         $fasilitas = Fasilitas::find($id);
 
         try {
-            if ($fasilitas->gambar_path != null) {
-                unlink($fasilitas->gambar_path);
+            if (Storage::disk('s3')->exists($fasilitas->gambar_path)) {
+                Storage::disk('s3')->delete($fasilitas->gambar_path);
             }
 
             $fasilitas->gambar_url = null;
@@ -122,13 +123,12 @@ class FasilitasServiceImpl implements FasilitasService
         $fasilitas = Fasilitas::find($id);
 
         try {
-            if ($fasilitas->gambar_path != null) {
-                unlink($fasilitas->gambar_path);
+            if (Storage::disk('s3')->exists($fasilitas->gambar_path)) {
+                Storage::disk('s3')->delete($fasilitas->gambar_path);
             }
-
             $dataFile = $this->uploads($image, 'fasilitas/');
-            $filePath = public_path('storage/' . $dataFile['filePath']);
-            $fileUrl = asset('storage/' . $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $fasilitas->gambar_path = $filePath;
             $fasilitas->gambar_url = $fileUrl;

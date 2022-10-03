@@ -26,7 +26,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
-                            <label for="gambar">Gambar</label>
+                            <label for="gambar">Thumbnail</label>
                             <input class="form-control" id="gambar" type="file" placeholder="gambar" name="gambar">
                         </div>
                         <div class="mb-3">

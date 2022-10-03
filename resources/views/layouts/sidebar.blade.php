@@ -7,7 +7,7 @@
             <i class="fas fa-desktop"></i>
         </div>
         <div class="sidebar-brand-text mx-3">
-            Ebfis FEB
+            EBFIS
         </div>
     </a>
 

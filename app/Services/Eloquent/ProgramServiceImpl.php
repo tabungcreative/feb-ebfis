@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services\Eloquent;
 
@@ -9,8 +9,10 @@ use App\Http\Requests\ProgramUpdateRequest;
 use App\Models\Program;
 use App\Services\ProgramService;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
-class ProgramServiceImpl implements ProgramService{
+class ProgramServiceImpl implements ProgramService
+{
 
     use Media;
 
@@ -26,8 +28,7 @@ class ProgramServiceImpl implements ProgramService{
             ]);
 
             $program->save();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -54,7 +55,7 @@ class ProgramServiceImpl implements ProgramService{
             $program->nama_program = $namaProgram;
             $program->isi = $isi;
             $program->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new  InvariantException($exception->getMessage());
         }
 
@@ -65,13 +66,11 @@ class ProgramServiceImpl implements ProgramService{
     {
         $program = Program::find($id);
         try {
-            if ($program->gambar_path != null) {
-                unlink($program->gambar_path);
+            if (Storage::disk('s3')->exists($program->gambar_path)) {
+                Storage::disk('s3')->delete($program->gambar_path);
             }
-
             $program->delete();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
     }
@@ -85,15 +84,14 @@ class ProgramServiceImpl implements ProgramService{
                 unlink($program->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'program/gambar/');
-            $filePath = public_path('storage/'. $dataFile['filePath']);
-            $fileUrl = asset('storage/'. $dataFile['filePath']);
+            $dataFile = $this->uploads($image, 'program/');
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $program->gambar_path = $filePath;
             $program->gambar_url = $fileUrl;
             $program->save();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -105,14 +103,13 @@ class ProgramServiceImpl implements ProgramService{
         $program = Program::find($id);
 
         try {
-            if ($program->gambar_path != null) {
-                unlink($program->gambar_path);
+            if (Storage::disk('s3')->exists($program->gambar_path)) {
+                Storage::disk('s3')->delete($program->gambar_path);
             }
-
             $program->gambar_url = null;
             $program->gambar_path = null;
             $program->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -124,26 +121,21 @@ class ProgramServiceImpl implements ProgramService{
         $program = Program::find($id);
 
         try {
-            if ($program->gambar_path != null) {
-                unlink($program->gambar_path);
+            if (Storage::disk('s3')->exists($program->gambar_path)) {
+                Storage::disk('s3')->delete($program->gambar_path);
             }
 
             $dataFile = $this->uploads($image, 'program/');
-            $filePath = public_path('storage/'. $dataFile['filePath']);
-            $fileUrl = asset('storage/'. $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $program->gambar_path = $filePath;
             $program->gambar_url = $fileUrl;
             $program->save();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
         return $program;
     }
-
 }
-
-
-?>

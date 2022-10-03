@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services\Eloquent;
 
@@ -8,8 +8,10 @@ use App\Http\Requests\PengumumanUpdateRequest;
 use App\Models\Pengumuman;
 use App\Services\PengumumanService;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
-class PengumumanServiceImpl implements PengumumanService{
+class PengumumanServiceImpl implements PengumumanService
+{
     use Media;
 
     function add(string $judul, string $isi): Pengumuman
@@ -24,7 +26,7 @@ class PengumumanServiceImpl implements PengumumanService{
             $pengumuman->save();
 
             return $pengumuman;
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
     }
@@ -34,13 +36,13 @@ class PengumumanServiceImpl implements PengumumanService{
         $pengumuman = Pengumuman::find($id);
         try {
             $dataFile = $this->uploads($file, 'pengumuman/');
-            $fileUrl = asset('storage/'. $dataFile['filePath']);
-            $filePath = public_path('storage/'. $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $pengumuman->file_url = $fileUrl;
             $pengumuman->file_path = $filePath;
             $pengumuman->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -52,12 +54,12 @@ class PengumumanServiceImpl implements PengumumanService{
         $pengumuman = Pengumuman::find($id);
         $judul = $request->input('judul');
         $isi = $request->input('isi');
-        
+
         try {
             $pengumuman->judul = $judul;
             $pengumuman->isi = $isi;
             $pengumuman->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -68,13 +70,11 @@ class PengumumanServiceImpl implements PengumumanService{
     {
         $pengumuman = Pengumuman::find($id);
         try {
-            if ($pengumuman->file_url != null || $pengumuman->file_path != null) {
-                unlink($pengumuman->file_path);
+            if (Storage::disk('s3')->exists($pengumuman->file_path)) {
+                Storage::disk('s3')->delete($pengumuman->file_path);
             }
-
             $pengumuman->delete();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
     }
@@ -84,14 +84,13 @@ class PengumumanServiceImpl implements PengumumanService{
         $pengumuman = Pengumuman::find($id);
 
         try {
-            if ($pengumuman->file_url != null || $pengumuman->file_path != null) {
-                unlink($pengumuman->file_path);
+            if (Storage::disk('s3')->exists($pengumuman->file_path)) {
+                Storage::disk('s3')->delete($pengumuman->file_path);
             }
-
             $pengumuman->file_url = null;
             $pengumuman->file_path = null;
             $pengumuman->save();
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -103,19 +102,18 @@ class PengumumanServiceImpl implements PengumumanService{
         $pengumuman = Pengumuman::find($id);
 
         try {
-            if ($pengumuman->file_url != null || $pengumuman->file_path != null) {
-                unlink($pengumuman->file_path);
+            if (Storage::disk('s3')->exists($pengumuman->file_path)) {
+                Storage::disk('s3')->delete($pengumuman->file_path);
             }
 
             $dataFile = $this->uploads($file, 'pengumuman/');
-            $filePath = public_path('storage/'. $dataFile['filePath']);
-            $fileUrl = asset('storage/'. $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $pengumuman->file_path = $filePath;
             $pengumuman->file_url = $fileUrl;
             $pengumuman->save();
-
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
 
@@ -124,7 +122,7 @@ class PengumumanServiceImpl implements PengumumanService{
 
     function list(string $key, $size = 10): LengthAwarePaginator
     {
-        $pengumuman = Pengumuman::where('judul', 'like', '%'.$key.'%')
+        $pengumuman = Pengumuman::where('judul', 'like', '%' . $key . '%')
             ->orderBy('created_at', 'DESC')
             ->paginate($size);
 
@@ -137,8 +135,4 @@ class PengumumanServiceImpl implements PengumumanService{
 
         return $pengumuman;
     }
-} 
-
-
-
-?>
+}

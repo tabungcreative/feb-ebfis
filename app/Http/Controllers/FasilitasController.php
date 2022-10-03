@@ -51,6 +51,14 @@ class FasilitasController extends Controller
     }
 
 
+    public function show($id)
+    {
+        //
+        $title = $this->title;
+        $fasilitas = Fasilitas::find($id);
+        return response()->view('fasilitas.show', compact('title', 'fasilitas'));
+    }
+
 
     public function edit($id)
     {

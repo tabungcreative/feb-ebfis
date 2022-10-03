@@ -11,6 +11,7 @@ use App\Models\Unduhan;
 use App\Services\UnduhanService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 class UnduhanServiceImpl implements UnduhanService
 {
@@ -61,8 +62,8 @@ class UnduhanServiceImpl implements UnduhanService
     {
         $unduhan = Unduhan::find($id);
         try {
-            if ($unduhan->file_url != null || $unduhan->file_path != null) {
-                unlink($unduhan->file_path);
+            if (Storage::disk('s3')->exists($unduhan->file_path)) {
+                Storage::disk('s3')->delete($unduhan->file_path);
             }
 
             $unduhan->delete();
@@ -78,8 +79,8 @@ class UnduhanServiceImpl implements UnduhanService
         try {
             $dataFile = $this->uploads($file, 'unduhan/');
 
-            $fileUrl = asset('storage/' . $dataFile['filePath']);
-            $filePath = public_path('storage/' . $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $unduhan->file_url = $fileUrl;
             $unduhan->file_path = $filePath;
@@ -96,13 +97,13 @@ class UnduhanServiceImpl implements UnduhanService
         $unduhan = Unduhan::find($id);
 
         try {
-            if ($unduhan->file_url != null || $unduhan->file_path != null) {
-                unlink($unduhan->file_path);
+            if (Storage::disk('s3')->exists($unduhan->file_path)) {
+                Storage::disk('s3')->delete($unduhan->file_path);
             }
 
             $dataFile = $this->uploads($file, 'unduhan/');
-            $filePath = public_path('storage/' . $dataFile['filePath']);
-            $fileUrl = asset('storage/' . $dataFile['filePath']);
+            $filePath = $dataFile['filePath'];
+            $fileUrl = $dataFile['fileUrl'];
 
             $unduhan->file_path = $filePath;
             $unduhan->file_url = $fileUrl;
@@ -120,8 +121,8 @@ class UnduhanServiceImpl implements UnduhanService
         $unduhan = Unduhan::find($id);
 
         try {
-            if ($unduhan->file_url != null || $unduhan->file_path != null) {
-                unlink($unduhan->file_path);
+            if (Storage::disk('s3')->exists($unduhan->file_path)) {
+                Storage::disk('s3')->delete($unduhan->file_path);
             }
 
             $unduhan->file_url = null;

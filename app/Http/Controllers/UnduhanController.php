@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\InvariantException;
 use App\Http\Requests\UnduhanAddRequest;
+use App\Http\Requests\UnduhanUpdateRequest;
+use App\Models\Unduhan;
 use App\Services\UnduhanService;
 use Illuminate\Http\Request;
 
@@ -48,6 +50,39 @@ class UnduhanController extends Controller
         }
     }
 
+
+
+    public function edit($id)
+    {
+        //
+        $title = $this->title;
+        $unduhan = Unduhan::find($id);
+        return response()->view('unduhan.edit', compact('title', 'unduhan'));
+    }
+
+    public function update(UnduhanUpdateRequest $request, $id)
+    {
+        //
+        $file = $request->file('file');
+
+        try {
+            $result = $this->unduhanService->update($request, $id);
+            if ($file != null) {
+                $this->unduhanService->updateFile($id, $file);
+            }
+            return response()->redirectTo(route('unduhan.index'))->with('success', 'Berhasil mengubah unduhan');
+        } catch (InvariantException $exception) {
+            return redirect()->back()->with('error', $exception->getMessage())->withInput($request->all());
+        }
+    }
+
+    public function show($id)
+    {
+        //
+        $title = $this->title;
+        $unduhan = Unduhan::find($id);
+        return response()->view('unduhan.show', compact('title', 'unduhan'));
+    }
 
 
     public function destroy($id)

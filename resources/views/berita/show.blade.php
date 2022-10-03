@@ -13,7 +13,7 @@
             </a>
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-center flex-row justify-content-around p-5">
+                    <div class="p-5">
                         <div class="row">
                             @if ($berita == null)   
                                 <!-- 404 Error Text -->
@@ -32,7 +32,8 @@
                                             <small class="my-2 text-gray ms-5"><i class="fa fa-user" aria-hidden="true"></i> Oleh : {{ $berita->penulis }}</small>
                                         </div>
                                     </div>
-                                    <img src="{{ $berita->gambar_url }}" class="img-fluid mb-5" width="100%">
+                                    <img src="{{ $berita->gambar_url }}" class="img-fluid mb-2" width="100%">
+                                    {{-- <a href="https://web.facebook.com/sharer.php?u={{route('berita.show',$berita->id)}}" class="btn btn-primary"><i class="fa fa-facebook"></i></a> --}}
                                     <p>
                                         {!! $berita->isi !!}
                                     </p>

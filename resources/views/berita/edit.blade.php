@@ -27,7 +27,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
-                            <label for="gambar">Gambar</label>
+                            <label for="gambar">Thumbnail</label>
                             <input class="form-control" id="gambar" type="file" placeholder="gambar" name="gambar">
                             <img src="{{ $berita->gambar_url }}" class="img-fluid block my-2" width="400px">
                         </div>

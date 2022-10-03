@@ -13,13 +13,13 @@
             </a>
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <form action="{{ route('unduhan.update'.$unduhan->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('unduhan.update',$unduhan->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nama_file">Nama file</label>
-                            <input class="form-control" id="nama_file" type="text" placeholder="Nama file" name="nama_file" value="{{ old('nama_file'.$unduhan->nama_file) }}" required>
+                            <input class="form-control" id="nama_file" type="text" placeholder="Nama file" name="nama_file" value="{{ old('nama_file',$unduhan->nama_file) }}" required>
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>

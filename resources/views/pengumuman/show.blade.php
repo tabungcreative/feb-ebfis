@@ -13,7 +13,7 @@
             </a>
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex align-items-center flex-row justify-content-around p-5">
+                    <div class="p-5">
                         <div class="row">
                             @if ($pengumuman == null)   
                                 <!-- 404 Error Text -->
@@ -31,8 +31,8 @@
                                             <small class="my-2 text-gray"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $pengumuman->created_at }}</small>
                                         </div>
                                     </div>
-                                    <a target="_blank" href="{{ $pengumuman->file_url }}">Preview</a>
-                                    <img src="{{ $pengumuman->gambar_url }}" class="img-fluid mb-5" width="100%">
+                                    <embed src="{{$pengumuman->file_url}}" type="application/pdf" width="100%" height="500px">
+                                    <a target="_blank" href="{{ $pengumuman->file_url }}">download</a>
                                     <p>
                                         {!! $pengumuman->isi !!}
                                     </p>
