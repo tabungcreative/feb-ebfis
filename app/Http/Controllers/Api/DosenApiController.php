@@ -13,18 +13,19 @@ class DosenApiController extends Controller
     {
         $size = $request->query("size");
 
-        $sizeLimit = 5;
+        $dosen = Dosen::all();
 
         if (isset($size)) {
-            $sizeLimit = $size;
+            $dosen = Dosen::latest()->limit($size)->get();
         }
 
-        $dosen = Dosen::latest()->limit($sizeLimit)->get();
         return response()->json([
             'status' => 'success',
             'data' => $dosen
         ]);
     }
+
+
     public function show($nidn)
     {
         $dosen = Dosen::where('nidn', $nidn)->first();

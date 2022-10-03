@@ -14,13 +14,12 @@ class ProgramApiController extends Controller
     {
         $size = $request->query("size");
 
-        $sizeLimit = 5;
+        $program = Program::all();
 
         if (isset($size)) {
-            $sizeLimit = $size;
+            $program = Program::latest()->limit($size)->get();
         }
 
-        $program = Program::latest()->limit($sizeLimit)->get();
         return response()->json([
             'status' => 'success',
             'data' => $program

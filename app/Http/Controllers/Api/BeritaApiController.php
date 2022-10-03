@@ -15,13 +15,12 @@ class BeritaApiController extends Controller
     {
         $size = $request->query("size");
 
-        $sizeLimit = 5;
+        $berita = Berita::all();
 
         if (isset($size)) {
-            $sizeLimit = $size;
+            $berita = Berita::latest()->limit($size)->get();
         }
 
-        $berita = Berita::latest()->limit($sizeLimit)->get();
         return response()->json([
             'status' => 'success',
             'data' => $berita

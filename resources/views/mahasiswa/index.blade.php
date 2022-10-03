@@ -13,7 +13,7 @@
                 <a class="btn btn-success mb-3" href="{{ route('mahasiswa.create') }}">
                     <i class="fas fa-plus"></i> Tambah Mahasiswa
                 </a>
-                <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file"></i> Import Mahasiswa</button>
+                <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#modalImport"><i class="fas fa-file"></i> Import Mahasiswa</button>
             </div>
             <div class="card shadow mb-4">
                 
@@ -42,7 +42,6 @@
                                     <th>Nama</th>
                                     <th>Prodi</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Nomer Handphone</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -54,12 +53,8 @@
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->prodi }}</td>
                                         <td>{{ $data->jenis_kelamin == "L" ? 'laki-laki' : 'perempuan' }}</td>
-                                        <td>{{ $data->nomer_hp }}</td>
                                         <td class="d-flex flex-col">
-                                            {{-- <a href="{{ route('mahasiswa.show', $data->id) }}">
-                                                <div class="btn btn-info "><i class="fas fa-info"></i></div>
-                                            </a> --}}
-                                            {{-- <button type="button" class="btn btn-info"><i class="fas fa-info"></i></button> --}}
+                                            {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailMahasiswa" id="detailMahasiswa" data-id="{{ $data->id }}"><i class="fas fa-info"></i></button> --}}
                                             <a href="{{ route('mahasiswa.edit', $data->id) }}">
                                                 <div class="btn btn-primary mx-2"><i class="fas fa-edit"></i></div>
                                             </a>
@@ -73,12 +68,12 @@
                                         </td>   
                                     </tr>
                                 @endforeach
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <!-- Import Modal --> 
+                                <div class="modal fade" id="modalImport" tabindex="-1" role="dialog" aria-labelledby="modalImport" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Import Mahasiswa</h5>
+                                                <h5 class="modal-title" id="modalImport">Import Mahasiswa</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -93,6 +88,25 @@
                                                     </div>
                                                     <button class="btn btn-primary" type="submit" id="button-addon2">Import</button>
                                                 </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Detail Mahasiswa Modal --> 
+                                <div class="modal fade" id="detailMahasiswa" tabindex="-1" role="dialog" aria-labelledby="detailMahasiswa" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detailMahasiswa">Detail Mahasiswa</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                               <p class="name" id="name"></p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

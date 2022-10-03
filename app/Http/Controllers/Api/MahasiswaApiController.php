@@ -13,13 +13,12 @@ class MahasiswaApiController extends Controller
     {
         $size = $request->query("size");
 
-        $sizeLimit = 5;
+        $mahasiswa = Mahasiswa::all();
 
         if (isset($size)) {
-            $sizeLimit = $size;
+            $mahasiswa = Mahasiswa::latest()->limit($size)->get();
         }
 
-        $mahasiswa = Mahasiswa::latest()->limit($sizeLimit)->get();
         return response()->json([
             'status' => 'success',
             'data' => $mahasiswa

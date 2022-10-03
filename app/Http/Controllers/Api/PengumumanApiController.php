@@ -13,13 +13,12 @@ class PengumumanApiController extends Controller
     {
         $size = $request->query("size");
 
-        $sizeLimit = 5;
+        $pengumuman = Pengumuman::all();
 
         if (isset($size)) {
-            $sizeLimit = $size;
+            $pengumuman = Pengumuman::latest()->limit($size)->get();
         }
 
-        $pengumuman = Pengumuman::latest()->limit($sizeLimit)->get();
         return response()->json([
             'status' => 'success',
             'data' => $pengumuman

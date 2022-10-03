@@ -13,13 +13,12 @@ class FasilitasApiController extends Controller
     {
         $size = $request->query("size");
 
-        $sizeLimit = 5;
+        $fasilitas = Fasilitas::all();
 
         if (isset($size)) {
-            $sizeLimit = $size;
+            $fasilitas = Fasilitas::latest()->limit($size)->get();
         }
 
-        $fasilitas = Fasilitas::latest()->limit($sizeLimit)->get();
         return response()->json([
             'status' => 'success',
             'data' => $fasilitas
