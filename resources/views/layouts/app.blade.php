@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Ebfis | Sistem Informasi FEB</title>
-
+    
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sb-admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link

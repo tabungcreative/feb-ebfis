@@ -4,6 +4,7 @@ namespace App\Services\Eloquent;
 
 use App\Exceptions\InvariantException;
 use App\Helper\Media;
+use App\Http\Requests\PengumumanAddRequest;
 use App\Http\Requests\PengumumanUpdateRequest;
 use App\Models\Pengumuman;
 use App\Services\PengumumanService;
@@ -14,14 +15,14 @@ class PengumumanServiceImpl implements PengumumanService
 {
     use Media;
 
-    function add(string $judul, string $isi): Pengumuman
+    function add(PengumumanAddRequest $request): Pengumuman
     {
+        $judul = $request->input('judul');
+        $isi = $request->input('isi');
         try {
             $pengumuman = new Pengumuman([
                 'judul' => $judul,
                 'isi' => $isi,
-                'file_url' => null,
-                'file_path' => null,
             ]);
             $pengumuman->save();
 
@@ -29,6 +30,7 @@ class PengumumanServiceImpl implements PengumumanService
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());
         }
+        return $pengumuman;
     }
 
     function addFile(int $id, $file): Pengumuman

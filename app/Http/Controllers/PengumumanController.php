@@ -37,12 +37,9 @@ class PengumumanController extends Controller
 
     public function store(PengumumanAddRequest $request)
     {
-        //
-        $judul = $request->input('judul');
-        $isi = $request->input('judul');
         $file = $request->file('file');
         try {
-            $pengumuman = $this->pengumumanService->add($judul, $isi);
+            $pengumuman = $this->pengumumanService->add($request);
             $this->pengumumanService->addFile($pengumuman->id, $file);
             return response()->redirectTo(route('pengumuman.index'))->with('success', 'Berhasil menambahkan pengumuman');
         } catch (InvariantException $exception) {

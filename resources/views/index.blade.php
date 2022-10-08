@@ -11,7 +11,7 @@
             <!-- Circle Buttons -->
             <div class="card shadow-sm border-left-danger mb-4">
                 <div class="card-body">
-                    
+                    <p>Selamat datang di sistem EBFIS</p>
                 </div>
             </div>
         </div>

@@ -25,13 +25,14 @@ class MahasiswaUpdateRequest extends FormRequest
     {
         return [
             //
+            'nim' => 'numeric',
             'nama' => 'required',
             'prodi' => 'required',
             'jenis_kelamin' => 'required',
             'nomer_hp' => 'numeric',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'nik' => 'required|numeric',
+            'tempat_lahir' => '',
+            'tanggal_lahir' => '',
+            'nik' => 'numeric',
         ];
     }
 }
