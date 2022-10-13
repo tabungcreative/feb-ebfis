@@ -2,12 +2,9 @@
 <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-        <div class="sidebar-brand-icon">
-            <i class="fas fa-desktop"></i>
-        </div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
         <div class="sidebar-brand-text mx-3">
-            EBFIS
+            <img src="https://is3.cloudhost.id/storage-feb/logo-sistem/logo-ebfis-putih.png" class="img-fluid my-2  " width="100%" alt="">
         </div>
     </a>
 
@@ -15,13 +12,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{Request::is('/') ? 'active' : ''}}">
-        <a class="nav-link" href="/">
+    <li class="nav-item {{Request::is('dashboard*') ? 'active' : ''}}">
+        <a class="nav-link" href="/dashboard">
             <i class="fas fa-home"></i>
             <span>Dashboard</span></a>
     </li>
-
-   
     <!-- Heading -->
     <div class="sidebar-heading">
         Informasi

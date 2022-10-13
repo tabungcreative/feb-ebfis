@@ -40,7 +40,9 @@ class PengumumanController extends Controller
         $file = $request->file('file');
         try {
             $pengumuman = $this->pengumumanService->add($request);
-            $this->pengumumanService->addFile($pengumuman->id, $file);
+            if($file!=null){
+                $this->pengumumanService->addFile($pengumuman->id, $file);
+            }
             return response()->redirectTo(route('pengumuman.index'))->with('success', 'Berhasil menambahkan pengumuman');
         } catch (InvariantException $exception) {
             return redirect()->back()->with('error', $exception->getMessage())->withInput($request->all());

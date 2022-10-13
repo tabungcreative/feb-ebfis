@@ -10,7 +10,8 @@
     <meta name="author" content="">
 
     <title>Ebfis | Sistem Informasi FEB</title>
-    
+    {{-- link icon --}}
+    <link rel="icon" href="https://is3.cloudhost.id/storage-feb/logo-sistem/logo-ebfis.png">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sb-admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
