@@ -13,7 +13,7 @@ class Berita extends Model
     protected $table = 'berita';
 
     protected $fillable = [
-        'judul', 'isi', 'penulis', 'gambar_path', 'gambar_url'
+        'judul', 'isi', 'penulis', 'gambar_path', 'gambar_url', 'created_at'
     ];
 
     public function getCreatedAtAttribute()

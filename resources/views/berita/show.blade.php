@@ -33,7 +33,6 @@
                                         </div>
                                     </div>
                                     <img src="{{ $berita->gambar_url }}" class="img-fluid mb-2" width="100%">
-                                    {{-- <a href="https://web.facebook.com/sharer.php?u={{route('berita.show',$berita->id)}}" class="btn btn-primary"><i class="fa fa-facebook"></i></a> --}}
                                     <p>
                                         {!! $berita->isi !!}
                                     </p>

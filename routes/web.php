@@ -37,9 +37,6 @@ Route::get('/', function () {
     return redirect('auth/login');
 });
 // Route::middleware('custom-auth')->group(function () {
-
-
-
 Route::get('/dashboard', function () {
     return view('index');
 });

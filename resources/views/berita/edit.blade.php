@@ -36,6 +36,11 @@
                             <label for="penulis">Penulis</label>
                             <input class="form-control" id="penulis" type="text" placeholder="Penulis" name="penulis" value="{{ old('penulis', $berita->penulis) }}" required>
                         </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="created_at">Tanggal Berita</label>
+                            <input class="form-control" id="created_at" type="date" placeholder="tanggal berita" name="created_at" value="{{ old('created_at') }}" required>
+                        </div>
                         <button button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
                 </div>
