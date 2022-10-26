@@ -36,17 +36,17 @@ Route::controller(AuthController::class)
 Route::get('/', function () {
     return redirect('auth/login');
 });
-// Route::middleware('custom-auth')->group(function () {
-Route::get('/dashboard', function () {
-    return view('index');
+Route::middleware('custom-auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('index');
+    });
+    // route resource crud
+    Route::resource('/berita', BeritaController::class);
+    Route::resource('/dosen', DosenController::class);
+    Route::resource('/fasilitas', FasilitasController::class);
+    Route::resource('/mahasiswa', MahasiswaController::class);
+    Route::post('/import-mahasiswa', [MahasiswaController::class, 'import']);
+    Route::resource('/pengumuman', PengumumanController::class);
+    Route::resource('/program', ProgramController::class);
+    Route::resource('/unduhan', UnduhanController::class);
 });
-// route resource crud
-Route::resource('/berita', BeritaController::class);
-Route::resource('/dosen', DosenController::class);
-Route::resource('/fasilitas', FasilitasController::class);
-Route::resource('/mahasiswa', MahasiswaController::class);
-Route::post('/import-mahasiswa', [MahasiswaController::class, 'import']);
-Route::resource('/pengumuman', PengumumanController::class);
-Route::resource('/program', ProgramController::class);
-Route::resource('/unduhan', UnduhanController::class);
-// });

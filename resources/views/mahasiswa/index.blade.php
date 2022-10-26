@@ -87,6 +87,7 @@
                                                         <input type="file" name="file" class="form-control" placeholder="file import" aria-label="file import" aria-describedby="button-addon2">
                                                     </div>
                                                     <button class="btn btn-primary" type="submit" id="button-addon2">Import</button>
+                                                    <a href="https://is3.cloudhost.id/storage-feb/assets/excel/template_mahasiswa.xlsx" target="_blank" class="btn btn-success" rel="noopener noreferrer">download template <i class="fas fa-download"></i> </a>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
