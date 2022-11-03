@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Berita;
+use App\Models\Dosen;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Berita::factory(10)->create();
+        Berita::factory(100)->create();
+        Dosen::factory(20)->create();
     }
 }

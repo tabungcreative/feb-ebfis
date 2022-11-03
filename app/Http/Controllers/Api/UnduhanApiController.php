@@ -13,13 +13,8 @@ class UnduhanApiController extends Controller
 
     public function index(Request $request)
     {
-        $size = $request->query("size");
-
-        $unduhan = Unduhan::all();
-
-        if (isset($size)) {
-            $unduhan = Unduhan::latest()->limit($size)->get();
-        }
+        $pageSize = $request->page_size ?? 10;
+        $unduhan = Unduhan::orderBy('created_at', 'desc')->paginate($pageSize);
 
         return response()->json([
             'status' => 'success',

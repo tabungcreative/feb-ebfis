@@ -13,13 +13,8 @@ class BeritaApiController extends Controller
 
     public function index(Request $request)
     {
-        $size = $request->query("size");
-
-        $berita = Berita::all();
-
-        if (isset($size)) {
-            $berita = Berita::latest()->limit($size)->get();
-        }
+        $pageSize = $request->page_size ?? 10;
+        $berita = Berita::orderBy('created_at', 'desc')->paginate($pageSize);
 
         return response()->json([
             'status' => 'success',

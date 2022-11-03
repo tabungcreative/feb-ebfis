@@ -42,6 +42,7 @@
                                     <th>Nama</th>
                                     <th>Prodi</th>
                                     <th>Jenis Kelamin</th>
+                                    <th>Tahun Masuk</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -53,6 +54,7 @@
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->prodi }}</td>
                                         <td>{{ $data->jenis_kelamin == "L" ? 'laki-laki' : 'perempuan' }}</td>
+                                        <td>{{ $data->tahun_masuk }}</td>
                                         <td class="d-flex flex-col">
                                             {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailMahasiswa" id="detailMahasiswa" data-id="{{ $data->id }}"><i class="fas fa-info"></i></button> --}}
                                             <a href="{{ route('mahasiswa.edit', $data->id) }}">

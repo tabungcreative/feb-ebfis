@@ -11,13 +11,8 @@ class DosenApiController extends Controller
     //
     public function index(Request $request)
     {
-        $size = $request->query("size");
-
-        $dosen = Dosen::all();
-
-        if (isset($size)) {
-            $dosen = Dosen::latest()->limit($size)->get();
-        }
+        // $pageSize = $request->page_size ?? 20;
+        $dosen = Dosen::orderBy('prodi', 'ASC')->get();
 
         return response()->json([
             'status' => 'success',

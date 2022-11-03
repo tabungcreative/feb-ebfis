@@ -12,13 +12,9 @@ class ProgramApiController extends Controller
 
     public function index(Request $request)
     {
-        $size = $request->query("size");
+        $pageSize = $request->page_size ?? 10;
+        $program = Program::orderBy('created_at', 'desc')->paginate($pageSize);
 
-        $program = Program::all();
-
-        if (isset($size)) {
-            $program = Program::latest()->limit($size)->get();
-        }
 
         return response()->json([
             'status' => 'success',

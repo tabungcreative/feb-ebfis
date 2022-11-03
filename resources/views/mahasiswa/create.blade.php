@@ -27,8 +27,8 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="prodi">Prodi</label>
-                            <select class="form-control" id="prodi" name="prodi">
-                                <option ><-- Pilih Prodi --></option>
+                            <select class="form-control" id="prodi" name="prodi" required="required">
+                                <option value="">Pilih Prodi</option>
                                 <option value="akuntansi" {{ old('prodi') == "akuntansi" ? 'selected' : '' }}>Akuntansi</option>
                                 <option value="manajemen" {{ old('prodi') == "manajemen" ? 'selected' : '' }}>Manajemen</option>
                                 <option value="perbankan syariah" {{ old('prodi') == "perbankan syariah" ? 'selected' : '' }}>Perbankan syariah</option>
@@ -49,22 +49,27 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nomer_hp">Nomer Handphone</label>
-                            <input class="form-control" id="nomer_hp" type="text" placeholder="Masukkan nomor handphone" name="nomer_hp" value="{{ old('nomer_hp') }}" required>
+                            <input class="form-control" id="nomer_hp" type="text" placeholder="Masukkan nomor handphone" name="nomer_hp" value="{{ old('nomer_hp') }}">
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="tempat_lahir">Tempat Lahir</label>
-                            <input class="form-control" id="tempat_lahir" type="text" placeholder="Masukkan tempat lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
+                            <input class="form-control" id="tempat_lahir" type="text" placeholder="Masukkan tempat lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="nik">NIK</label>
-                            <input class="form-control" id="nik" type="text" placeholder="Masukkan NIK" name="nik" value="{{ old('nik') }}" required>
+                            <input class="form-control" id="nik" type="number" placeholder="Masukkan NIK" name="nik" value="{{ old('nik') }}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="tahun_masuk">Tahun Masuk</label>
+                            <input class="form-control" id="tahun_masuk" type="number" placeholder="Masukkan tahun masuk" name="tahun_masuk" value="{{ old('tahun_masuk') }}">
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input class="" id="tanggal_lahir" type="date" placeholder="tanggal lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
+                            <input class="" id="tanggal_lahir" type="date" placeholder="tanggal lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
                         </div>
                         <button button type="submit" class="btn btn-primary">Kirim</button>
                     </form>

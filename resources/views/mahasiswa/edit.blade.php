@@ -28,8 +28,8 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="prodi">Prodi</label>
-                            <select class="form-control" id="prodi" name="prodi">
-                                <option ><-- Pilih Prodi --></option>
+                            <select class="form-control" id="prodi" name="prodi" required="required">
+                                <option value="">Pilih Prodi</option>
                                 <option value="akuntansi" {{ old('prodi',$mahasiswa->prodi) == "akuntansi" ? 'selected' : '' }}>Akuntansi</option>
                                 <option value="manajemen" {{ old('prodi',$mahasiswa->prodi) == "manajemen" ? 'selected' : '' }}>Manajemen</option>
                                 <option value="perbankan syariah" {{ old('prodi',$mahasiswa->prodi) == "perbankan syariah" ? 'selected' : '' }}>Perbankan syariah</option>
@@ -61,6 +61,11 @@
                             <label class="text-danger">*</label>
                             <label for="nik">NIK</label>
                             <input class="form-control" id="nik" type="text" placeholder="NIK" name="nik" value="{{ old('nik',$mahasiswa->nik) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="tahun_masuk">Tahun Masuk</label>
+                            <input class="form-control" id="tahun_masuk" type="number" placeholder="Masukkan tahun masuk" name="tahun_masuk" value="{{ old('tahun_masuk',$mahasiswa->tahun_masuk) }}">
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>

@@ -11,13 +11,9 @@ class FasilitasApiController extends Controller
     //
     public function index(Request $request)
     {
-        $size = $request->query("size");
+        $pageSize = $request->page_size ?? 10;
+        $fasilitas = Fasilitas::orderBy('nama_fasilitas', 'asc')->paginate($pageSize);
 
-        $fasilitas = Fasilitas::all();
-
-        if (isset($size)) {
-            $fasilitas = Fasilitas::latest()->limit($size)->get();
-        }
 
         return response()->json([
             'status' => 'success',

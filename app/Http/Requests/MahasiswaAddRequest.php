@@ -29,10 +29,11 @@ class MahasiswaAddRequest extends FormRequest
             'nama' => 'required',
             'prodi' => 'required',
             'jenis_kelamin' => 'required',
-            'nomer_hp' => 'numeric',
+            'nomer_hp' => '',
             'tempat_lahir' => '',
             'tanggal_lahir' => '',
-            'nik' => 'numeric',
+            'nik' => '',
+            'tahun_masuk' => '',
         ];
     }
 }

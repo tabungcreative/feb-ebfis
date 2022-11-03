@@ -11,13 +11,8 @@ class PengumumanApiController extends Controller
     //
     public function index(Request $request)
     {
-        $size = $request->query("size");
-
-        $pengumuman = Pengumuman::all();
-
-        if (isset($size)) {
-            $pengumuman = Pengumuman::latest()->limit($size)->get();
-        }
+        $pageSize = $request->page_size ?? 10;
+        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->paginate($pageSize);
 
         return response()->json([
             'status' => 'success',

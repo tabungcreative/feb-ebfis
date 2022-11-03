@@ -3,31 +3,37 @@
 namespace App\Imports;
 
 use App\Models\Mahasiswa;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
-use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Date;
 
-class MahasiswaImport implements ToModel, WithStartRow
+class MahasiswaImport implements ToCollection, WithStartRow
 {
-    /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function model(array $row)
+
+    public function collection(Collection $collection)
     {
-        // dd($row);
-        return new Mahasiswa([
-            'nim' => $row[0],
-            'nama' => $row[1],
-            'prodi' => $row[2],
-            'jenis_kelamin' => $row[3],
-            'nomer_hp' => $row[4],
-            'tempat_lahir' => $row[5],
-            'tanggal_lahir' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['6'])->format('Y-m-d'),
-            'nik' => $row[7],
-        ]);
+        foreach ($collection as $row) {
+
+            if ($row[0] == null) {
+                continue;
+            } else {
+                Mahasiswa::updateOrCreate([
+                    "nim" => $row[0]
+                ], [
+                    "nim" => $row[0],
+                    'nama' => $row[1],
+                    'prodi' => $row[2],
+                    'jenis_kelamin' => $row[3],
+                    'nomer_hp' => null,
+                    'tempat_lahir' => null,
+                    'tanggal_lahir' => null,
+                    'nik' => null,
+                    'tahun_masuk' => $row[4]
+                ]);
+            }
+        }
     }
+
     public function startRow(): int
     {
         return 2;

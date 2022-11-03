@@ -23,6 +23,7 @@ class MahasiswaServiceImpl implements MahasiswaService
         $tempatLahir = $request->input('tempat_lahir');
         $tanggalLahir = $request->input('tanggal_lahir');
         $nik = $request->input('nik');
+        $tahunMasuk = $request->input('tahun_masuk');
 
         try {
             DB::beginTransaction();
@@ -35,6 +36,7 @@ class MahasiswaServiceImpl implements MahasiswaService
                 'tempat_lahir' => $tempatLahir,
                 'tanggal_lahir' => $tanggalLahir,
                 'nik' => $nik,
+                'tahun_masuk' => $tahunMasuk,
             ]);
             $mahasiswa->save();
             DB::commit();
@@ -62,6 +64,8 @@ class MahasiswaServiceImpl implements MahasiswaService
         $tempatLahir = $request->input('tempat_lahir');
         $tanggalLahir = $request->input('tanggal_lahir');
         $nik = $request->input('nik');
+        $tahunMasuk = $request->input('tahun_masuk');
+
 
         $mahasiswa = Mahasiswa::find($id);
 
@@ -74,6 +78,7 @@ class MahasiswaServiceImpl implements MahasiswaService
             $mahasiswa->tempat_lahir = $tempatLahir;
             $mahasiswa->tanggal_lahir = $tanggalLahir;
             $mahasiswa->nik = $nik;
+            $mahasiswa->tahun_masuk = $tahunMasuk;
             $mahasiswa->save();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());

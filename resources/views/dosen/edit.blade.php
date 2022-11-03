@@ -33,8 +33,8 @@
                         <div class="mb-3">
                             <label class="text-danger">*</label>
                             <label for="prodi">Prodi</label>
-                            <select class="form-control" id="prodi" name="prodi">
-                                <option ><-- Pilih Prodi --></option>
+                            <select class="form-control" id="prodi" name="prodi" required="required">
+                                <option value="">Pilih Prodi</option>
                                 <option value="akuntansi" {{ old('prodi',$dosen->prodi) == "akuntansi" ? 'selected' : '' }}>Akuntansi</option>
                                 <option value="manajemen" {{ old('prodi',$dosen->prodi) == "manajemen" ? 'selected' : '' }}>Manajemen</option>
                                 <option value="perbankan syariah" {{ old('prodi',$dosen->prodi) == "perbankan syariah" ? 'selected' : '' }}>Perbankan syariah</option>

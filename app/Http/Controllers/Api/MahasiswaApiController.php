@@ -11,13 +11,8 @@ class MahasiswaApiController extends Controller
     //
     public function index(Request $request)
     {
-        $size = $request->query("size");
-
-        $mahasiswa = Mahasiswa::all();
-
-        if (isset($size)) {
-            $mahasiswa = Mahasiswa::latest()->limit($size)->get();
-        }
+        $pageSize = $request->page_size ?? 20;
+        $mahasiswa = Mahasiswa::orderBy('created_at', 'desc')->paginate($pageSize);
 
         return response()->json([
             'status' => 'success',
