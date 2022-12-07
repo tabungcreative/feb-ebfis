@@ -25,9 +25,8 @@ class UnduhanAddRequest extends FormRequest
     {
         return [
             //
-            //
             'nama_file' => 'required',
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|file|max:5000',
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,doc,docx|file|max:5000',
         ];
     }
 }
