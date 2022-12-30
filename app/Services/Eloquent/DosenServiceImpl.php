@@ -24,6 +24,8 @@ class DosenServiceImpl implements DosenService
         $tempatLahir = $request->input('tempat_lahir');
         $tanggalLahir = $request->input('tanggal_lahir');
         $nik = $request->input('nik');
+        $lulusanTerakhir = $request->input('lulusan_terakhir');
+        $keilmuan = $request->input('keilmuan');
 
 
         try {
@@ -38,6 +40,8 @@ class DosenServiceImpl implements DosenService
                 'tempat_lahir' => $tempatLahir,
                 'tanggal_lahir' => $tanggalLahir,
                 'nik' => $nik,
+                'lulusan_terakhir' => $lulusanTerakhir,
+                'keilmuan' => $keilmuan,
 
             ]);
             $dosen->save();
@@ -67,6 +71,8 @@ class DosenServiceImpl implements DosenService
         $tempatLahir = $request->input('tempat_lahir');
         $tanggalLahir = $request->input('tanggal_lahir');
         $nik = $request->input('nik');
+        $lulusanTerakhir = $request->input('lulusan_terakhir');
+        $keilmuan = $request->input('keilmuan');
 
         $dosen = Dosen::find($id);
 
@@ -80,6 +86,8 @@ class DosenServiceImpl implements DosenService
             $dosen->tempat_lahir = $tempatLahir;
             $dosen->tanggal_lahir = $tanggalLahir;
             $dosen->nik = $nik;
+            $dosen->lulusan_terakhir = $lulusanTerakhir;
+            $dosen->keilmuan = $keilmuan;
             $dosen->save();
         } catch (\Exception $exception) {
             throw new InvariantException($exception->getMessage());

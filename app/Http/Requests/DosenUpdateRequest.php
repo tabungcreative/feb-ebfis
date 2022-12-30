@@ -34,6 +34,8 @@ class DosenUpdateRequest extends FormRequest
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'nik' => 'required|numeric',
+            'lulusan_terakhir' => 'required',
+            'keilmuan' => 'required',
         ];
     }
 }

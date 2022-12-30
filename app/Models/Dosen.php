@@ -11,5 +11,5 @@ class Dosen extends Model
 
     protected $table = 'dosen';
 
-    protected $fillable = ['kode_dosen', 'nidn', 'nama', 'prodi', 'jenis_kelamin', 'nomer_hp', 'tempat_lahir', 'tanggal_lahir', 'nik'];
+    protected $fillable = ['kode_dosen', 'nidn', 'nama', 'prodi', 'jenis_kelamin', 'nomer_hp', 'tempat_lahir', 'tanggal_lahir', 'nik', 'lulusan_terakhir', 'keilmuan'];
 }
