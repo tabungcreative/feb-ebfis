@@ -69,6 +69,16 @@
                         </div>
                         <div class="mb-3">
                             <label class="text-danger">*</label>
+                            <label for="lulusan_terakhir">Lulusan Terakhir</label>
+                            <input class="form-control" id="lulusan_terakhir" type="text" placeholder="Masukkan Pendidikan Terakhir" name="lulusan_terakhir" value="{{ old('lulusan_terakhir',$dosen->lulusan_terakhir) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
+                            <label for="keilmuan">Keilmuan</label>
+                            <input class="form-control" id="keilmuan" type="text" placeholder="Masukkan Bidang Keilmuan" name="keilmuan" value="{{ old('keilmuan',$dosen->keilmuan) }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="text-danger">*</label>
                             <label for="tanggal_lahir">Tanggal Lahir</label>
                             <input class="" id="tanggal_lahir" type="date" placeholder="tanggal lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir',$dosen->tanggal_lahir) }}" required>
                         </div>
