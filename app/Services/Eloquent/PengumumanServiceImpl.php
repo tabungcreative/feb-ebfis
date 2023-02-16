@@ -37,7 +37,7 @@ class PengumumanServiceImpl implements PengumumanService
     {
         $pengumuman = Pengumuman::find($id);
         try {
-            $dataFile = $this->uploads($file, 'pengumuman/');
+            $dataFile = $this->uploads($file, 'ebfis/pengumuman/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 
@@ -108,7 +108,7 @@ class PengumumanServiceImpl implements PengumumanService
                 Storage::disk('s3')->delete($pengumuman->file_path);
             }
 
-            $dataFile = $this->uploads($file, 'pengumuman/');
+            $dataFile = $this->uploads($file, 'ebfis/pengumuman/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 

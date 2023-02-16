@@ -84,7 +84,7 @@ class ProgramServiceImpl implements ProgramService
                 unlink($program->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'program/');
+            $dataFile = $this->uploads($image, 'ebfis/program/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 
@@ -125,7 +125,7 @@ class ProgramServiceImpl implements ProgramService
                 Storage::disk('s3')->delete($program->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'program/');
+            $dataFile = $this->uploads($image, 'ebfis/program/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 
