@@ -9,7 +9,6 @@ use App\Http\Requests\UnduhanAddRequest;
 use App\Http\Requests\UnduhanUpdateRequest;
 use App\Models\Unduhan;
 use App\Services\UnduhanService;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 
