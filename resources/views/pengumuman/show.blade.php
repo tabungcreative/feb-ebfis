@@ -31,8 +31,8 @@
                                             <small class="my-2 text-gray"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $pengumuman->created_at }}</small>
                                         </div>
                                     </div>
-                                    <embed src="{{$pengumuman->file_url}}" type="application/pdf" width="100%" height="500px">
-                                    <a target="_blank" href="{{ $pengumuman->file_url }}">download</a>
+                                    <embed src="{{asset('storage/' . $pengumuman->file_path)}}" type="application/pdf" width="100%" height="500px">
+                                    <a target="_blank" href="{{asset('storage/' . $pengumuman->file_path)}}">download</a>
                                     <p>
                                         {!! $pengumuman->isi !!}
                                     </p>

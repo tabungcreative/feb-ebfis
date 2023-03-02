@@ -30,7 +30,7 @@
                                             <h4 class="text-dark">{{ $unduhan->judul }}</h4>
                                             <small class="my-2 text-gray"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $unduhan->created_at }}</small>
                                         </div>
-                                        <embed src="{{$unduhan->file_url}}" type="application/pdf" width="100%" height="400px">
+                                        <embed src="{{asset('storage/' . $unduhan->file_path)}}" type="application/pdf" width="100%" height="400px">
                                     </div>
                                     {{-- <a target="_blank" href="{{ $unduhan->file_url }}">Preview</a> --}}
                                     <p>

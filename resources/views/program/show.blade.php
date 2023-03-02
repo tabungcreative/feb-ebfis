@@ -31,7 +31,7 @@
                                             <small class="my-2 text-gray"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $program->created_at }}</small>
                                         </div>
                                     </div>
-                                    <img src="{{ $program->gambar_url }}" class="img-fluid mb-5" width="100%">
+                                    <img src="{{asset('storage/' . $program->gambar_path)}}" class="img-fluid mb-5" width="100%">
                                     <p>
                                         {!! $program->isi !!}
                                     </p>

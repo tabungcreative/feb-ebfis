@@ -31,7 +31,7 @@
                                             <small class="my-2 text-gray"><i class="fa fa-calendar" aria-hidden="true"></i> {{ $fasilitas->created_at }}</small>
                                         </div>
                                     </div>
-                                    <img src="{{ $fasilitas->gambar_url }}" class="img-fluid mb-5" width="100%">
+                                    <img src="{{asset('storage/' . $fasilitas->gambar_path)}}" class="img-fluid mb-5" width="100%">
                                     <p>
                                         {!! $fasilitas->isi !!}
                                     </p>
