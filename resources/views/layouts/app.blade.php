@@ -11,7 +11,7 @@
 
     <title>Ebfis | Sistem Informasi FEB</title>
     {{-- link icon --}}
-    <link rel="icon" href="https://is3.cloudhost.id/storage-feb/logo-sistem/logo-ebfis.png">
+    <link rel="icon" href={{asset('storage/images/logo-ebfis.png')}}>
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sb-admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -40,7 +40,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                     <a href="https://feb-unsiq.ac.id/" target="_blank"><i class="fa fa-home"></i></a>
+                    <a href="https://feb-unsiq.ac.id/" target="_blank"><i class="fa fa-home"></i></a>
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>

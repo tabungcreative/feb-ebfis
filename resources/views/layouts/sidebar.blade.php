@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
         <div class="sidebar-brand-text mx-3">
-            <img src="https://is3.cloudhost.id/storage-feb/logo-sistem/logo-ebfis-putih.png" class="img-fluid my-2  " width="100%" alt="">
+            <img src={{asset('storage/images/logo-ebfis-putih.png')}} class="img-fluid my-2  " width="100%" alt="">
         </div>
     </a>
 
