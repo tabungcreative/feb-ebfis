@@ -29,6 +29,7 @@ class BeritaUpdateRequest extends FormRequest
             'isi' => 'required',
             'penulis' => 'required',
             'created_at' => 'required',
+            'gambar' => 'required'
         ];
     }
 }

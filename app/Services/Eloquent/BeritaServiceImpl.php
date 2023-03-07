@@ -72,12 +72,12 @@ class BeritaServiceImpl implements BeritaService
         return $berita;
     }
 
-    function delete(int $id): void
+    function delete($id): void
     {
         $berita = Berita::find($id);
         try {
-            if (Storage::disk('s3')->exists($berita->gambar_path)) {
-                Storage::disk('s3')->delete($berita->gambar_path);
+            if ($berita->gambar_path != null) {
+                $this->deleteFile($berita->gambar_path);
             }
             $berita->delete();
         } catch (\Exception $exception) {
@@ -89,21 +89,18 @@ class BeritaServiceImpl implements BeritaService
     {
         $berita = Berita::find($id);
 
-        try {
-            if ($berita->gambar_path != null) {
-                unlink($berita->gambar_path);
-            }
-
-            $dataFile = $this->uploads($image, 'berita/');
-            $filePath = $dataFile['filePath'];
-            $fileUrl = $dataFile['fileUrl'];
-
-            $berita->gambar_path = $filePath;
-            $berita->gambar_url = $fileUrl;
-            $berita->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+        if ($berita->gambar_path != null) {
+            $this->deleteFile($berita->gambar_path);
         }
+
+
+        $dataFile = $this->uploads($image, 'berita/');
+        $filePath = $dataFile;
+        $fileUrl = asset('storage/' . $dataFile);
+
+        $berita->gambar_path = $filePath;
+        $berita->gambar_url = $fileUrl;
+        $berita->save();
 
         return $berita;
     }
@@ -112,16 +109,13 @@ class BeritaServiceImpl implements BeritaService
     {
         $berita = Berita::find($id);
 
-        try {
-            $berita->gambar_url = null;
-            $berita->gambar_path = null;
-            if (Storage::disk('s3')->exists($berita->gambar_path)) {
-                Storage::disk('s3')->delete($berita->gambar_path);
-            }
-            $berita->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+
+        $berita->gambar_url = null;
+        $berita->gambar_path = null;
+        if ($berita->gambar_path != null) {
+            $this->deleteFile($berita->gambar_path);
         }
+        $berita->save();
 
         return $berita;
     }
@@ -130,21 +124,18 @@ class BeritaServiceImpl implements BeritaService
     {
         $berita = Berita::find($id);
 
-        try {
-            if (Storage::disk('s3')->exists($berita->gambar_path)) {
-                Storage::disk('s3')->delete($berita->gambar_path);
-            }
-            $dataFile = $this->uploads($image, 'berita/');
-            $filePath = $dataFile['filePath'];
-            $fileUrl = $dataFile['fileUrl'];
-
-
-            $berita->gambar_path = $filePath;
-            $berita->gambar_url = $fileUrl;
-            $berita->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+        if ($berita->gambar_path != null) {
+            $this->deleteFile($berita->gambar_path);
         }
+
+        $dataFile = $this->uploads($image, 'berita/');
+        $filePath = $dataFile;
+        $fileUrl = asset('storage/' . $dataFile);
+
+
+        $berita->gambar_path = $filePath;
+        $berita->gambar_url = $fileUrl;
+        $berita->save();
 
         return $berita;
     }

@@ -77,6 +77,7 @@ class BeritaController extends Controller
             }
             return response()->redirectTo(route('berita.index'))->with('success', 'Berhasil mengubah berita');
         } catch (InvariantException $exception) {
+            dd($exception);
             return redirect()->back()->with('error', $exception->getMessage())->withInput($request->all());
         }
     }
