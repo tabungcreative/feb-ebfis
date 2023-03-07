@@ -10,7 +10,6 @@ use App\Http\Requests\UnduhanUpdateRequest;
 use App\Models\Unduhan;
 use App\Services\UnduhanService;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Storage;
 
 class UnduhanServiceImpl implements UnduhanService
 {
@@ -60,15 +59,13 @@ class UnduhanServiceImpl implements UnduhanService
     function delete(int $id): void
     {
         $unduhan = Unduhan::find($id);
-        try {
-            if (Storage::disk('s3')->exists($unduhan->file_path)) {
-                Storage::disk('s3')->delete($unduhan->file_path);
-            }
 
-            $unduhan->delete();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+        if ($unduhan->file_path != null) {
+            $this->deleteFile($unduhan->file_path);
         }
+
+        $unduhan->delete();
+
     }
 
     function addFile($file, int $id): Unduhan
@@ -78,8 +75,8 @@ class UnduhanServiceImpl implements UnduhanService
         try {
             $dataFile = $this->uploads($file, 'unduhan/');
 
-            $filePath = $dataFile['filePath'];
-            $fileUrl = $dataFile['fileUrl'];
+            $filePath = $dataFile;
+            $fileUrl = asset('storage/' . $dataFile);
 
             $unduhan->file_url = $fileUrl;
             $unduhan->file_path = $filePath;
@@ -95,42 +92,19 @@ class UnduhanServiceImpl implements UnduhanService
     {
         $unduhan = Unduhan::find($id);
 
-        try {
-            if (Storage::disk('s3')->exists($unduhan->file_path)) {
-                Storage::disk('s3')->delete($unduhan->file_path);
-            }
-
-            $dataFile = $this->uploads($file, 'unduhan/');
-            $filePath = $dataFile['filePath'];
-            $fileUrl = $dataFile['fileUrl'];
-
-            $unduhan->file_path = $filePath;
-            $unduhan->file_url = $fileUrl;
-            $unduhan->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+        if ($unduhan->file_path != null) {
+            $this->deleteFile($unduhan->file_path);
         }
+
+        $dataFile = $this->uploads($file, 'unduhan/');
+        $filePath = $dataFile;
+        $fileUrl = asset('storage/' . $dataFile);
+
+        $unduhan->file_path = $filePath;
+        $unduhan->file_url = $fileUrl;
+        $unduhan->save();
 
         return $unduhan;
     }
 
-
-    function deleteFile(int $id, $file): Unduhan
-    {
-        $unduhan = Unduhan::find($id);
-
-        try {
-            if (Storage::disk('s3')->exists($unduhan->file_path)) {
-                Storage::disk('s3')->delete($unduhan->file_path);
-            }
-
-            $unduhan->file_url = null;
-            $unduhan->file_path = null;
-            $unduhan->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
-        }
-
-        return $unduhan;
-    }
 }
