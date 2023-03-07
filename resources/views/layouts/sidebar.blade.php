@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
         <div class="sidebar-brand-text mx-3">
-            <img src={{asset('storage/images/logo-ebfis-putih.png')}} class="img-fluid my-2  " width="100%" alt="">
+            <img src={{asset('logo-ebfis-putih.png')}} class="img-fluid my-2  " width="100%" alt="">
         </div>
     </a>
 
@@ -21,7 +21,7 @@
     <div class="sidebar-heading">
         Informasi
     </div>
-    
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
     <!-- Nav Item - berita -->
@@ -43,7 +43,7 @@
     </div>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-    
+
     <!-- Nav Item - dosen -->
     <li class="nav-item {{Request::is('dosen*') ? 'active' : ''}}">
         <a class="nav-link" href="/dosen">
@@ -85,7 +85,7 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
-    
+
 
 
 </ul>
