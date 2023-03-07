@@ -76,7 +76,7 @@ class UnduhanServiceImpl implements UnduhanService
         $unduhan = Unduhan::find($id);
 
         try {
-            $dataFile = $this->uploads($file, 'ebfis/unduhan/');
+            $dataFile = $this->uploads($file, 'unduhan/');
 
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
@@ -100,7 +100,7 @@ class UnduhanServiceImpl implements UnduhanService
                 Storage::disk('s3')->delete($unduhan->file_path);
             }
 
-            $dataFile = $this->uploads($file, 'ebfis/unduhan/');
+            $dataFile = $this->uploads($file, 'unduhan/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 

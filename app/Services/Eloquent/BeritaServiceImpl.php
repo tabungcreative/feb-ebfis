@@ -94,7 +94,7 @@ class BeritaServiceImpl implements BeritaService
                 unlink($berita->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'ebfis/berita/');
+            $dataFile = $this->uploads($image, 'berita/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 
@@ -134,7 +134,7 @@ class BeritaServiceImpl implements BeritaService
             if (Storage::disk('s3')->exists($berita->gambar_path)) {
                 Storage::disk('s3')->delete($berita->gambar_path);
             }
-            $dataFile = $this->uploads($image, 'ebfis/berita/');
+            $dataFile = $this->uploads($image, 'berita/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 

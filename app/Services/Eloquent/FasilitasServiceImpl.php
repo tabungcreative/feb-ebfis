@@ -85,7 +85,7 @@ class FasilitasServiceImpl implements FasilitasService
                 unlink($fasilitas->gambar_path);
             }
 
-            $dataFile = $this->uploads($image, 'ebfis/fasilitas/');
+            $dataFile = $this->uploads($image, 'fasilitas/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 
@@ -126,7 +126,7 @@ class FasilitasServiceImpl implements FasilitasService
             if (Storage::disk('s3')->exists($fasilitas->gambar_path)) {
                 Storage::disk('s3')->delete($fasilitas->gambar_path);
             }
-            $dataFile = $this->uploads($image, 'ebfis/fasilitas/');
+            $dataFile = $this->uploads($image, 'fasilitas/');
             $filePath = $dataFile['filePath'];
             $fileUrl = $dataFile['fileUrl'];
 
