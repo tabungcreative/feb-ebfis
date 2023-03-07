@@ -36,17 +36,15 @@ class PengumumanServiceImpl implements PengumumanService
     function addFile(int $id, $file): Pengumuman
     {
         $pengumuman = Pengumuman::find($id);
-        try {
-            $dataFile = $this->uploads($file, 'pengumuman/');
-            $filePath = $dataFile['filePath'];
-            $fileUrl = $dataFile['fileUrl'];
 
-            $pengumuman->file_url = $fileUrl;
-            $pengumuman->file_path = $filePath;
-            $pengumuman->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
-        }
+        $dataFile = $this->uploads($file, 'pengumuman/');
+        $filePath = $dataFile;
+        $fileUrl = asset('storage/' . $dataFile);
+
+        $pengumuman->file_url = $fileUrl;
+        $pengumuman->file_path = $filePath;
+        $pengumuman->save();
+
 
         return $pengumuman;
     }
@@ -71,53 +69,31 @@ class PengumumanServiceImpl implements PengumumanService
     function delete(int $id): void
     {
         $pengumuman = Pengumuman::find($id);
-        try {
-            if (Storage::disk('s3')->exists($pengumuman->file_path)) {
-                Storage::disk('s3')->delete($pengumuman->file_path);
-            }
-            $pengumuman->delete();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+
+        if ($pengumuman->file_path != null) {
+            $this->deleteFile($pengumuman->file_path);
         }
-    }
+        $pengumuman->delete();
 
-    function deleteFile(int $id, $file): Pengumuman
-    {
-        $pengumuman = Pengumuman::find($id);
-
-        try {
-            if (Storage::disk('s3')->exists($pengumuman->file_path)) {
-                Storage::disk('s3')->delete($pengumuman->file_path);
-            }
-            $pengumuman->file_url = null;
-            $pengumuman->file_path = null;
-            $pengumuman->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
-        }
-
-        return $pengumuman;
     }
 
     function editFile(int $id, $file): Pengumuman
     {
         $pengumuman = Pengumuman::find($id);
 
-        try {
-            if (Storage::disk('s3')->exists($pengumuman->file_path)) {
-                Storage::disk('s3')->delete($pengumuman->file_path);
-            }
 
-            $dataFile = $this->uploads($file, 'pengumuman/');
-            $filePath = $dataFile['filePath'];
-            $fileUrl = $dataFile['fileUrl'];
-
-            $pengumuman->file_path = $filePath;
-            $pengumuman->file_url = $fileUrl;
-            $pengumuman->save();
-        } catch (\Exception $exception) {
-            throw new InvariantException($exception->getMessage());
+        if ($pengumuman->file_path != null) {
+            $this->deleteFile($pengumuman->file_path);
         }
+
+        $dataFile = $this->uploads($file, 'pengumuman/');
+        $filePath = $dataFile;
+        $fileUrl = asset('storage/' . $dataFile);
+
+        $pengumuman->file_path = $filePath;
+        $pengumuman->file_url = $fileUrl;
+        $pengumuman->save();
+
 
         return $pengumuman;
     }

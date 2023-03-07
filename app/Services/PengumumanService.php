@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -14,6 +14,5 @@ interface PengumumanService{
     function edit(PengumumanUpdateRequest $request, int $id): Pengumuman;
     function delete(int $id): void;
     function addFile(int $id, $file): Pengumuman;
-    function deleteFile(int $id, $file): Pengumuman;
     function editFile(int $id, $file): Pengumuman;
 }
