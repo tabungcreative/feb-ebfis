@@ -16,7 +16,7 @@
                 <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#modalImport"><i class="fas fa-file"></i> Import Mahasiswa</button>
             </div>
             <div class="card shadow mb-4">
-                
+
                 <div class="card-header bg-white d-flex align-items-center flex-row justify-content-around">
                     <h5 class="flex-grow-1">Daftar Mahasiswa</h5>
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -30,9 +30,9 @@
                             </div>
                         </div>
                     </form>
-                </div>    
+                </div>
                 <div class="card-body">
-                    
+
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -66,11 +66,11 @@
                                                 <button class="btn btn-danger delete-confirm">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </form>   
-                                        </td>   
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
-                                <!-- Import Modal --> 
+                                <!-- Import Modal -->
                                 <div class="modal fade" id="modalImport" tabindex="-1" role="dialog" aria-labelledby="modalImport" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -87,9 +87,10 @@
                                                         <label class="text-danger">*</label>
                                                         <label for="gambar">File</label>
                                                         <input type="file" name="file" class="form-control" placeholder="file import" aria-label="file import" aria-describedby="button-addon2">
+                                                        <span class="text-danger text-sm">*download template untuk dapat mengimpor data mahasiswa dengan menggunakan file .xlsx</span>
                                                     </div>
                                                     <button class="btn btn-primary" type="submit" id="button-addon2">Import</button>
-                                                    <a href={{asset('storage/template_mahasiswa.xlsx')}} target="_blank" class="btn btn-success" rel="noopener noreferrer">download template <i class="fas fa-download"></i> </a>
+                                                    <a href={{asset('storage/template/template_mahasiswa.xlsx')}} class="btn btn-success" rel="noopener noreferrer">download template <i class="fas fa-download"></i> </a>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
@@ -98,7 +99,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Detail Mahasiswa Modal --> 
+                                <!-- Detail Mahasiswa Modal -->
                                 <div class="modal fade" id="detailMahasiswa" tabindex="-1" role="dialog" aria-labelledby="detailMahasiswa" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
